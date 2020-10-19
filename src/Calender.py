@@ -1,17 +1,19 @@
 # coding: utf-8
 import datetime
 import pickle
-import os.path
+import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from dotenv import load_dotenv
+load_dotenv()
 
 
 class Calender:
     def __init__(self):
         self.scopes = ['https://www.googleapis.com/auth/calendar']
-        self.calId = '0e6bmos2vtuuhma6bop1vkdpqo@group.calendar.google.com'
-        self.year = 2020
+        self.calId = os.environ['CALENDAR_ID']
+        self.year = int(os.environ['YEAR'])
 
         creds = None
         # The file token.pickle stores the user's access and refresh tokens,
