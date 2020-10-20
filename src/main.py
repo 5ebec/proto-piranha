@@ -32,16 +32,18 @@ def get_title(bs, year):
 def main():
     global colorId
     calender = Calender()
-
-    # base
     base_url = "https://syllabus.naist.jp"
     list_url = f"{base_url}/subjects/preview_list"
 
-    # syllabuses list
+    # delete all events first
+    calender.delete_all_events()
+
+    # get syllabuses list
     list_response = get_retry(list_url)
     list_bs = BeautifulSoup(list_response.content, "html.parser")
     syllabuses = list_bs.select('.w20pr a')
 
+    # run export for each syllabus
     for syllabus in syllabuses:
         subject_name = syllabus.text
         subject_url = base_url + syllabus.get('href')
@@ -50,6 +52,7 @@ def main():
         subject_bs = BeautifulSoup(subject_response.content, "html.parser")
         class_info = subject_bs.select('.tbl01.mB20')[3]
 
+        # one class
         if "表示可能なデータがありません。" in class_info.text:
             schedules = subject_bs.select('.tbl01.mB20')[5].select('tr td')
             if len(schedules) == 1:
@@ -57,6 +60,8 @@ def main():
             title = get_title(subject_bs, calender.year)
             calender.add_schedules(title, subject_url, schedules, colorId)
             sleep(1)
+
+        # more than one class
         else:
             for class_detail in class_info.select('.btn02.w55'):
                 subject_url = base_url + class_detail.get('href')
@@ -71,4 +76,6 @@ def main():
                 title = get_title(subject_bs, calender.year)
                 calender.add_schedules(title, subject_url, schedules, colorId)
                 sleep(1)
+
+        # change colorId (11 different colors)
         colorId = (colorId + 1) % 11
