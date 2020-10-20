@@ -35,7 +35,7 @@ class Calender:
                 pickle.dump(creds, token)
         self.service = build('calendar', 'v3', credentials=creds)
 
-    def add_schedules(self, title, url, schedules):
+    def add_schedules(self, title, url, schedules, colorId):
         schedules = [schedules[i:i + 5] for i in range(0, len(schedules), 5)]
         for i, date, period, location, note in schedules:
             date_time = self.datetime_formatter(date.text, period.text)
@@ -51,6 +51,7 @@ class Calender:
                     'dateTime': date_time[1],
                     'timeZone': 'Japan',
                 },
+                'colorId': colorId + 1
             }
             event = self.service.events().insert(
                 calendarId=self.calId, body=body).execute()

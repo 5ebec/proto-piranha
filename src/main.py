@@ -1,10 +1,11 @@
 # coding: utf-8
+import re
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
-import re
-
 from src.Calender import Calender
+
+colorId = 0
 
 
 def get_retry(url, retry_times=5):
@@ -29,7 +30,9 @@ def get_title(bs, year):
 
 
 def main():
+    global colorId
     calender = Calender()
+
     # base
     base_url = "https://syllabus.naist.jp"
     list_url = f"{base_url}/subjects/preview_list"
@@ -52,7 +55,7 @@ def main():
             if len(schedules) == 1:
                 continue
             title = get_title(subject_bs, calender.year)
-            calender.add_schedules(title, subject_url, schedules)
+            calender.add_schedules(title, subject_url, schedules, colorId)
             sleep(1)
         else:
             for class_detail in class_info.select('.btn02.w55'):
@@ -66,5 +69,6 @@ def main():
                 if len(schedules) == 1:
                     continue
                 title = get_title(subject_bs, calender.year)
-                calender.add_schedules(title, subject_url, schedules)
+                calender.add_schedules(title, subject_url, schedules, colorId)
                 sleep(1)
+        colorId = (colorId + 1) % 11

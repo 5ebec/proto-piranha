@@ -210,3 +210,4 @@ tags
 ### custom ###
 credentials.json
 token.pickle
+*.ipynb
