@@ -64,7 +64,7 @@ class Calender:
         for i, date, period, location, note in schedules:
             date_time = self.datetime_formatter(date.text, period.text)
             body = {
-                'summary': f"{title} [第{int(i.text)+1}回]",
+                'summary': f"{title} [第{int(i.text)}回]",
                 'location': location.text,
                 'description': f"{note.text}\n{url}",
                 'start': {
