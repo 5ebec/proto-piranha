@@ -6,7 +6,6 @@ authors = ["5ebec <hash.a5ebec@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pandas = "^1.1.2"
 requests = "^2.24.0"
 beautifulsoup4 = "^4.9.3"
 google-api-python-client = "^1.12.3"
