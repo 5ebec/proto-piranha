@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "Proto Piranha"
 version = "0.1.0"
-description = "NAIST"
+description = "convert NAIST e-syllabus system into Google Calendar"
 authors = ["5ebec <hash.a5ebec@gmail.com>"]
 
 [tool.poetry.dependencies]
