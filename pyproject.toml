@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "piranhabon"
+name = "Proto Piranha"
 version = "0.1.0"
 description = "NAIST"
 authors = ["5ebec <hash.a5ebec@gmail.com>"]
