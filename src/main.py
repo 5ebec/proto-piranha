@@ -5,8 +5,6 @@ from bs4 import BeautifulSoup
 from time import sleep
 from src.Calender import Calender
 
-colorId = 0
-
 
 def get_retry(url, retry_times=5):
     for t in range(retry_times + 1):
@@ -30,7 +28,7 @@ def get_title(bs, year):
 
 
 def main():
-    global colorId
+    colorId = 0
     calender = Calender()
     base_url = "https://syllabus.naist.jp"
     list_url = f"{base_url}/subjects/preview_list"
